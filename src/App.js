@@ -98,6 +98,7 @@ function Product(props) {
             <img src={props.shoeImages} width="80%"/>
             <h4>{props.shoes[props.i].title}</h4>
             <p>{props.shoes[props.i].price}</p>
+            {/*ㅋㅋㅋㅋ*/}
         </Col>
     )
 }
