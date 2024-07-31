@@ -9,6 +9,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useState} from "react";
+import DetailPage from "./DetailPage";
 
 import data from './data.js'
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -53,7 +54,7 @@ function App() {
                       </Container>
                   </>
               } component={App} />
-              <Route path="/detail" element={ <DetailPage/> }/>
+              <Route path="/detail/:id" element={ <DetailPage shoes={shoes}/> }/>
               <Route path="/about" element={<div>어바웃페이지임</div>} />
               <Route path="/event" element={<Event />}>
                   <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />
@@ -74,24 +75,6 @@ function Event() {
     )
 }
 
-function DetailPage() {
-    return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6">
-                    <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%"/>
-                </div>
-                <div className="col-md-6">
-                    <h4 className="pt-5">상품명</h4>
-                    <p>상품설명</p>
-                    <p>120000원</p>
-                    <button className="btn btn-danger">주문하기</button>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 function Product(props) {
     return (
         <Col sm>
@@ -104,11 +87,3 @@ function Product(props) {
 
 
 export default App;
-
-
-// 실험용 글
-// 실험용 글2
-// 실험용 글3
-// 실험용 글4
-// 실험용 글5
-// 실험용 글6
