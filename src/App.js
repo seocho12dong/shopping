@@ -78,7 +78,9 @@ function Event() {
 function Product(props) {
     return (
         <Col sm>
-            <img src={props.shoeImages} width="80%"/>
+            <Link to={`/detail/${props.i}`}>
+                <img src={props.shoeImages} width="80%"/>
+            </Link>
             <h4>{props.shoes[props.i].title}</h4>
             <p>{props.shoes[props.i].price}</p>
         </Col>
