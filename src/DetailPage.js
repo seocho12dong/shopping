@@ -56,8 +56,6 @@ function InputTest(props) {
         if (isNaN(props.idValue)) {
             alert('숫자를 입력해주세요');
             props.setIdValue('');
-        } else {
-            console.log('숫자를 입력했네요');
         }
     }, [props.idValue]); // props.idValue가 변경될 때만 실행
 

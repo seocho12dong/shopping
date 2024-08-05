@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useState} from "react";
 import DetailPage from "./DetailPage";
+import axios from "axios";
 
 import data from './data.js'
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -17,6 +18,9 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 function App() {
 
     let [shoes] = useState(data);
+    let [extraShoes, setExtraShoes] = useState(data);
+    let [showData2, setShowData2] = useState(false);
+
     const shoeImages = [shoes1, shoes2, shoes3];
     let navigate = useNavigate();
 
@@ -42,16 +46,22 @@ function App() {
                       <div className="main-bg"></div>
                       <Container>
                           <Row>
-                              {
-                                  shoes.map(function(a, i) {
-                                      return (
+                              { shoes.map(function(a, i) {
+                                  return (
                                           <Product shoeImages={shoeImages[i]} i={i} shoes={shoes}/>
                                       )
                                   })
                               }
-
                           </Row>
                       </Container>
+                      <button onClick={()=>{
+                          axios.get('https://codingapple1.github.io/shop/data2.json')
+                              .then((추가데이터)=>{
+                                  setShowData2(true);
+
+                          })
+                      }}>버튼</button>
+                      {/*<Data2 showData2={showData2} extraShoes={extraShoes}/>*/}
                   </>
               } component={App} />
               <Route path="/detail/:id" element={ <DetailPage shoes={shoes}/> }/>
@@ -66,6 +76,20 @@ function App() {
       </div>
   );
 }
+// function Data2(props) {
+//     return (
+//         <div>
+//             {
+//                 props.showData2 &&
+//                 <div>
+//                     { 추가데이터 }
+//                 </div>
+//             }
+//         </div>
+//     )
+// }
+
+
 function Event() {
     return (
         <div>
