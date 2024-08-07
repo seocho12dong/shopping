@@ -17,9 +17,7 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
 function App() {
 
-    let [shoes] = useState(data);
-    let [extraShoes, setExtraShoes] = useState(data);
-    let [showData2, setShowData2] = useState(false);
+    let [shoes, setShoes] = useState(data);
 
     const shoeImages = [shoes1, shoes2, shoes3];
     let navigate = useNavigate();
@@ -57,11 +55,9 @@ function App() {
                       <button onClick={()=>{
                           axios.get('https://codingapple1.github.io/shop/data2.json')
                               .then((추가데이터)=>{
-                                  setShowData2(true);
-
-                          })
+                                  setShoes([...shoes, ...추가데이터.data])
+                              })
                       }}>버튼</button>
-                      {/*<Data2 showData2={showData2} extraShoes={extraShoes}/>*/}
                   </>
               } component={App} />
               <Route path="/detail/:id" element={ <DetailPage shoes={shoes}/> }/>
@@ -71,23 +67,9 @@ function App() {
                   <Route path="two" element={<div>생일기념 쿠폰받기</div>} />
               </Route>
           </Routes>
-
-
       </div>
   );
 }
-// function Data2(props) {
-//     return (
-//         <div>
-//             {
-//                 props.showData2 &&
-//                 <div>
-//                     { 추가데이터 }
-//                 </div>
-//             }
-//         </div>
-//     )
-// }
 
 
 function Event() {
