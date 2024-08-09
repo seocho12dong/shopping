@@ -1,9 +1,16 @@
-import { useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import styled from 'styled-components';
 import { useEffect, useState } from "react";
 import {Nav} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import { pushCart } from "./store";
 
 function DetailPage(props) {
+
+    let state = useSelector((state)=>{ return state })
+    let dispatch = useDispatch();
+
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setShow(false);
@@ -46,8 +53,14 @@ function DetailPage(props) {
                     <h4 className="pt-5">{찾은상품.title}</h4>
                     <p>{찾은상품.content}</p>
                     <p>{찾은상품.price}원</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={() => {
+                        dispatch(pushCart(찾은상품.id))
+                    }}>주문하기
+                    </button>
                 </div>
+                <Link to={`/cart`}>
+                    장바구니 버튼
+                </Link>
             </div>
 
             <Nav variant="tabs" defaultActiveKey="link-1">
