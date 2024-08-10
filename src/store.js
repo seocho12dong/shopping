@@ -43,11 +43,14 @@
                     })
 
                 }
+            },
+            deleteCart(state, action) {
+                return state = state.filter(item => item.id !== action.payload)
             }
         }
     })
 
-    export let { changeCount, pushCart } = cartData.actions
+    export let { changeCount, pushCart, deleteCart } = cartData.actions
 
     export default configureStore({
         reducer: {
