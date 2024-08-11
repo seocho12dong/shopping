@@ -8,7 +8,7 @@ import shoes3 from './img/shoes3.jpg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import DetailPage from "./DetailPage";
 import axios from "axios";
 import Cart from "./routes/Cart.js";
@@ -17,6 +17,11 @@ import data from './data.js'
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 
 function App() {
+
+    useEffect(() => {
+        !localStorage.getItem('watched') && localStorage.setItem('watched', JSON.stringify( [] ))
+    }, []);
+
 
     let [shoes, setShoes] = useState(data);
 
@@ -82,7 +87,16 @@ function Event() {
 function Product(props) {
     return (
         <Col sm>
-            <Link to={`/detail/${props.i}`}>
+            <Link to={`/detail/${props.i}`} onClick={()=>{
+                let 꺼낸거 = localStorage.getItem('watched')
+                let 어레이 = JSON.parse(꺼낸거)
+                if (!어레이.includes(`${props.i}`)) {
+                    어레이.push(`${props.i}`);
+                }
+
+                console.log(어레이)
+                localStorage.setItem('watched', JSON.stringify(어레이))
+            }}>
                 <img src={props.shoeImages} width="80%"/>
             </Link>
             <h4>{props.shoes[props.i].title}</h4>
